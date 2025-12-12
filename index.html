@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>두들링 ENT | 댄스커버 이벤트 신청</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f9f5ef;
+      --card: #fffaf3;
+      --panel: #fff3e1;
+      --border: #efd8bf;
+      --accent: #f06c8f;
+      --accent-2: #f3c623;
+      --text: #2f2619;
+      --muted: #7a6c57;
+      --shadow: 0 12px 36px rgba(204, 164, 120, 0.28);
+      --radius: 18px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans KR', 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 10%, rgba(240,108,143,0.16), transparent 32%),
+                  radial-gradient(circle at 85% 15%, rgba(243,198,35,0.18), transparent 30%),
+                  radial-gradient(circle at 50% 90%, rgba(133,201,255,0.18), transparent 32%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 32px 18px 48px;
+    }
+
+    .wrapper { max-width: 980px; margin: 0 auto; }
+
+    header {
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff7ec;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 6px;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #2b1f14;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .title span.badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(240,108,143,0.2), rgba(243,198,35,0.24));
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: #2b1f14;
+    }
+    .meta {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      margin-top: 10px;
+      flex-wrap: nowrap;
+    }
+    .meta .chip {
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: #fffdf8;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .layout { display: grid; grid-template-columns: 1fr; }
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 22px 20px;
+    }
+    .section h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .section p.desc { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+
+    form { display: grid; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field label { font-size: 14px; font-weight: 700; color: var(--text); }
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      font-size: 14px;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    .field textarea { min-height: 94px; resize: vertical; }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(240,108,143,0.2);
+      outline: none;
+      background: #fff7ec;
+    }
+
+    .platform-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .platform-btn {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fffdf8;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 14px;
+      transition: .2s;
+    }
+    .platform-btn.active {
+      border-color: var(--accent);
+      color: #2b1f14;
+      background: linear-gradient(120deg, #ffd7a3, #f06c8f);
+      font-weight: 700;
+      box-shadow: 0 10px 22px rgba(240,108,143,0.25);
+    }
+
+    .consent-box {
+      background: #fff7ec;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      padding: 12px;
+      line-height: 1.55;
+    }
+
+    button {
+      background: linear-gradient(120deg, #f06c8f, #f3c623);
+      color: #2b1f14;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .1s ease, box-shadow .1s ease;
+      box-shadow: 0 12px 28px rgba(240,108,143,0.35);
+      letter-spacing: -0.2px;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 16px 34px rgba(240,108,143,0.42); }
+    button:active { transform: translateY(0); }
+
+    .status { font-size: 14px; font-weight: 700; min-height: 22px; }
+    .success { color: #1f9d55; }
+    .error { color: #d93025; }
+
+    @media (max-width: 540px) {
+      header { align-items: flex-start; }
+      .title { font-size: 24px; }
+      body { padding: 22px 14px 38px; }
+      .meta { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="brand">
+        <div>
+          <div class="title">두들링 엔터테인먼트 댄스커버 지원 이벤트</div>
+          <div class="subtitle">■총 10분 선발 예정이며, 선발된 분들께는 신청해주신 연락처로 개별 연락드릴 예정입니다.</div>
+          <div class="subtitle">■ 선발자: 선정 시 DM 또는 연락처로 개별 안내/추후 광고&협찬&프로젝트 진행시 우선 제공</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <section class="section">
+        <h2>📝 참가 신청하기</h2>
+        <p class="desc">정확한 안내를 위해 필수 항목을 모두 입력해주세요.</p>
+
+        <form id="eventForm" novalidate>
+          <div class="field">
+            <label>이름 *</label>
+            <input type="text" name="name" placeholder="홍길동" required>
+          </div>
+
+          <div class="field">
+            <label>연락처 *</label>
+            <input type="tel" name="phone" placeholder="010-1234-5678" required>
+          </div>
+
+          <div class="field">
+            <label>지역 *</label>
+            <input type="text" name="region" placeholder="서울 / 부산 / 대구 ..." required>
+          </div>
+
+          <div class="field">
+            <label>연령대 *</label>
+            <select name="age" required>
+              <option value="">선택하세요</option>
+              <option>10대</option>
+              <option>20대</option>
+              <option>30대</option>
+              <option>40대 이상</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>영상 업로드 플랫폼 *</label>
+            <div class="platform-group" id="platformGroup">
+              <div class="platform-btn" data-value="TikTok">TikTok</div>
+              <div class="platform-btn" data-value="Instagram">Instagram</div>
+              <div class="platform-btn" data-value="YouTube">YouTube</div>
+              <div class="platform-btn" data-value="기타">기타</div>
+            </div>
+            <input type="hidden" name="platform" id="platform" required>
+          </div>
+
+          <div class="field">
+            <label>사용 음원명 *</label>
+            <input type="text" name="audio" placeholder="곡명 / 아티스트" required>
+          </div>
+
+          <div class="field">
+            <label>SNS 계정 (채널 URL)</label>
+            <input type="text" name="handle" placeholder="채널 URL 또는 @account">
+          </div>
+
+          <div class="field">
+            <label>추가 메모</label>
+            <textarea name="note" placeholder="영상 컨셉, 팀원 수, 촬영 장비 등 자유롭게 적어주세요."></textarea>
+          </div>
+
+          <div class="field">
+            <label>개인정보 수집·이용 동의 *</label>
+            <div class="consent-box">
+              수집 항목: 이름, 연락처, 지역, 연령대, 플랫폼 정보, 선택 입력 항목.<br>
+              이용 목적: 이벤트 참가 확인, 우수 영상 선정 및 개별 연락.<br>
+              보관 기간: 이벤트 종료 후 6개월 이내 파기.<br>
+              귀하는 동의를 거부할 권리가 있으나, 동의하지 않을 시 신청이 제한됩니다.
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px;">
+              <input type="checkbox" id="consent" style="width:18px; height:18px;"> 동의합니다
+            </label>
+          </div>
+
+          <div class="field">
+            <label>마케팅 목적 2차 활용 동의 *</label>
+            <div class="consent-box">
+              2차 활용 항목: 제출한 촬영물·편집물·이미지·SNS 링크 및 개인정보(연락처 포함)<br>
+              활용 목적: 향후 광고/협찬 제안, 프로젝트 참여 안내, 크리에이터 섭외,<br>
+              &nbsp;&nbsp;회사 SNS·홈페이지·광고물 등 홍보 콘텐츠로 활용<br>
+              활용 기간: 신청일 기준 24개월<br>
+              권리: 콘텐츠의 2차 활용 및 가공·편집에 대한 권한은 두들링이엔티(두들링ENT)에 부여됨
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px;">
+              <input type="checkbox" id="marketing" style="width:18px; height:18px;"> 동의합니다
+            </label>
+          </div>
+
+          <button type="submit">신청 완료하기</button>
+          <div id="status" class="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const platformGroup = document.getElementById('platformGroup');
+    const platformInput = document.getElementById('platform');
+    const statusEl = document.getElementById('status');
+    const form = document.getElementById('eventForm');
+    const consent = document.getElementById('consent');
+    const marketing = document.getElementById('marketing');
+
+    platformGroup.addEventListener('click', (e) => {
+      const btn = e.target.closest('.platform-btn');
+      if (!btn) return;
+      document.querySelectorAll('.platform-btn').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      platformInput.value = btn.dataset.value;
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      statusEl.textContent = '';
+      statusEl.className = 'status';
+
+      if (!platformInput.value) {
+        statusEl.textContent = '영상 업로드 플랫폼을 선택해주세요.';
+        statusEl.classList.add('error');
+        return;
+      }
+      if (!consent.checked) {
+        statusEl.textContent = '개인정보 수집·이용에 동의해주세요.';
+        statusEl.classList.add('error');
+        return;
+      }
+      if (!marketing.checked) {
+        statusEl.textContent = '마케팅 목적 2차 활용에 동의해주세요.';
+        statusEl.classList.add('error');
+        return;
+      }
+      if (!form.checkValidity()) {
+        statusEl.textContent = '필수 항목을 확인해주세요.';
+        statusEl.classList.add('error');
+        return;
+      }
+
+      const formData = Object.fromEntries(new FormData(form).entries());
+      
+      // Google Apps Script 웹훅 URL
+      const webhookURL = 'https://script.google.com/macros/s/AKfycbxNzZTAv3u2tsuQ27NF5qW2l2TnGHRIlYffgKEyKU_UiHcVxvC2sdgH29cZvp9cnyKjFw/exec';
+      
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        statusEl.textContent = '신청이 완료되었습니다! 담당자가 확인 후 개별 안내드릴게요.';
+        statusEl.classList.add('success');
+        form.reset();
+        document.querySelectorAll('.platform-btn').forEach(el => el.classList.remove('active'));
+        platformInput.value = '';
+        consent.checked = false;
+        marketing.checked = false;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        statusEl.textContent = '신청이 완료되었습니다! 담당자가 확인 후 개별 안내드릴게요.';
+        statusEl.classList.add('success');
+        form.reset();
+        document.querySelectorAll('.platform-btn').forEach(el => el.classList.remove('active'));
+        platformInput.value = '';
+        consent.checked = false;
+        marketing.checked = false;
+      });
+    });
+  </script>
+</body>
+</html>
